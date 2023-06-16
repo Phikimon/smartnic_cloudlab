@@ -24,6 +24,8 @@ request = pc.makeRequestRSpec()
 # Node bf1
 node_bf1 = request.RawPC('bf1')
 node_bf1.hardware_type = 'r7525'
+# Does not seem like we can use newer versions of Ubuntu yet
+# https://gitlab.flux.utah.edu/emulab/emulab-devel/-/issues/661
 node_bf1.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU20-64-STD'
 bs1 = node_bf1.Blockstore("bs1", "/mydata")
 bs1.size = "50GB"
