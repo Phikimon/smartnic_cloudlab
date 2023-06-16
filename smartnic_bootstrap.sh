@@ -7,7 +7,7 @@ sudo date | sudo tee -a /etc/motd
 
 cat /local/repository/source/bashrc_template | sudo tee /root/.bashrc
 
-DEBIAN_FRONTEND=noninteractive sudo apt-get update
+DEBIAN_FRONTEND=noninteractive sudo apt-get update -y
 
 sudo echo -e "\nInstalling xfce and vnc server..."
 DEPS="tightvncserver lightdm lxde xfonts-base libnss3-dev firefox"
