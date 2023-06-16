@@ -34,7 +34,7 @@ DOCKER="docker-ce docker-ce-cli containerd.io"
 DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends $DOCKER
 
 #dpdk dependencies
-DPDK_DEP="libc6-dev libpcap0.8 libpcap0.8-dev libpcap-dev meson ninja-build libnuma-dev"
+DPDK_DEP="libc6-dev libpcap0.8 libpcap0.8-dev libpcap-dev meson ninja-build libnuma-dev python3-pyelftools"
 DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends $DPDK_DEP
 
 sudo echo -e "\nStopping docker daemon and update location for downloading sources..."
@@ -73,7 +73,7 @@ sudo systemctl status rshim
 
 sudo echo "DISPLAY_LEVEL 1" |sudo tee /dev/rshim0/misc
 
-sudo echo -e "\nUpdate netplan to assign IP to tmfif_net0..."
+sudo echo -e "\nUpdate netplan to assign IP to tmfifo_net0..."
 sudo cp /local/repository/source/01-netcfg.yaml /etc/netplan/
 sudo systemctl restart systemd-networkd
 sudo netplan apply
@@ -97,10 +97,10 @@ echo -e "\n\nTo change mode: mlxconfig -d /dev/mst/mt41686_pciconf0 s INTERNAL_C
 
 sudo echo -e "\nInstalling DPDK..."
 cd /opt
-sudo wget https://fast.dpdk.org/rel/dpdk-20.11.1.tar.xz
-sudo tar -xJvf dpdk-20.11.1.tar.xz
-cd dpdk-stable-20.11.1
-export RTE_SDK=/opt/dpdk-stable-20.11.1
+sudo wget https://fast.dpdk.org/rel/dpdk-22.11.2.tar.xz
+sudo tar -xJvf dpdk-22.11.2.tar.xz
+cd dpdk-stable-22.11.2
+export RTE_SDK=/opt/dpdk-stable-22.11.2
 export RTE_TARGET=x86_64-native-linuxapp-gcc
 #export RTE_TARGET=arm64-armv8-linuxapp-gcc <-- this would be for the Bluefield, but now we are on the host
 sudo meson -Dexamples=all build
