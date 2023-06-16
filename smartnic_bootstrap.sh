@@ -119,7 +119,7 @@ cd Builddir/
 sudo ninja install
 
 sudo echo -e "\nEnabling hugepages..."
-sudo echo 1024 | sudo tee /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
+sudo echo 4096 | sudo tee /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
 mountpoint -q /dev/hugepages || mount -t hugetlbfs nodev /dev/hugepages
 
 # FORBIDDEN - HAVE TO BE LOGGED IN :(
