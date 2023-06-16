@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 {
 sudo echo -e "\n\n ============ INSTALLATION IS IN PROGRESS =========== " | sudo tee /etc/motd
