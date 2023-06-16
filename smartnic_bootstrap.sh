@@ -47,7 +47,7 @@ sudo echo -e "\nInstalling MLNX driver..." |sudo tee -a /opt/install_log
 #sudo echo -e "\nCopy to /opt..." >> /opt/install_log
 cd /opt
 sudo echo -e "\nDownloading driver to /opt..." |sudo tee -a /opt/install_log
-sudo wget  http://www.mellanox.com/downloads/ofed/MLNX_OFED-5.3-1.0.0.1/MLNX_OFED_LINUX-5.3-1.0.0.1-ubuntu20.04-x86_64.tgz 
+sudo wget  http://www.mellanox.com/downloads/ofed/MLNX_OFED-5.3-1.0.0.1/MLNX_OFED_LINUX-5.3-1.0.0.1-ubuntu20.04-x86_64.tgz
 #sudo cp /local/repository/source/MLNX_OFED_LINUX-5.3-1.0.0.1-ubuntu20.04-x86_64.tgz /opt
 #sudo cd /opt
 sudo echo -e "\nUncompress..." |sudo tee -a /opt/install_log
@@ -93,7 +93,7 @@ echo -e "\n\nTo change mode: mlxconfig -d /dev/mst/mt41686_pciconf0 s INTERNAL_C
 
 sudo echo -e "\nInstalling DPDK..." | sudo tee -a /opt/install_log
 cd /opt
-sudo wget https://fast.dpdk.org/rel/dpdk-20.11.1.tar.xz 
+sudo wget https://fast.dpdk.org/rel/dpdk-20.11.1.tar.xz
 sudo tar -xJvf dpdk-20.11.1.tar.xz |sudo tee -a /opt/install_log
 cd dpdk-stable-20.11.1
 export RTE_SDK=/opt/dpdk-stable-20.11.1
@@ -105,7 +105,7 @@ sudo ninja -C build install | sudo tee -a /opt/install_log
 
 sudo echo -e "\nInstalling pktgen..." | sudo tee -a /opt/install_log
 cd /opt
-sudo wget https://git.dpdk.org/apps/pktgen-dpdk/snapshot/pktgen-dpdk-pktgen-21.02.0.tar.xz 
+sudo wget https://git.dpdk.org/apps/pktgen-dpdk/snapshot/pktgen-dpdk-pktgen-21.02.0.tar.xz
 sudo tar -xJvf pktgen-dpdk-pktgen-21.02.0.tar.xz | sudo tee -a /opt/install_log
 cd pktgen-dpdk-pktgen-21.02.0/
 sudo make | sudo tee -a /opt/install_log
