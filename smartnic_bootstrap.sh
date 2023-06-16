@@ -40,7 +40,7 @@ DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends $
 sudo echo -e "\nStopping docker daemon and update location for downloading sources..."
 sudo /etc/init.d/docker stop
 #define new location in docker daemon.json
-sudo echo -e "{\n\t\"data-root\":\"/mydata/docker\"\n}" |sudo tee /etc/docker/daemon.json
+sudo echo -e "{\n\t\"data-root\":\"/mydata/docker\"\n}" | sudo tee /etc/docker/daemon.json
 #rsync old docker files to new locations
 rsync -aP /var/lib/docker/ /mydata/docker
 #restart docker
@@ -71,7 +71,7 @@ sudo systemctl start rshim
 sudo systemctl status rshim
 
 
-sudo echo "DISPLAY_LEVEL 1" |sudo tee /dev/rshim0/misc
+sudo echo "DISPLAY_LEVEL 1" | sudo tee /dev/rshim0/misc
 
 sudo echo -e "\nUpdate netplan to assign IP to tmfifo_net0..."
 sudo cp /local/repository/source/01-netcfg.yaml /etc/netplan/
@@ -102,21 +102,24 @@ sudo tar -xJvf dpdk-22.11.2.tar.xz
 cd dpdk-stable-22.11.2
 export RTE_SDK=/opt/dpdk-stable-22.11.2
 export RTE_TARGET=x86_64-native-linuxapp-gcc
-#export RTE_TARGET=arm64-armv8-linuxapp-gcc <-- this would be for the Bluefield, but now we are on the host
 sudo meson -Dexamples=all build
 sudo ninja -C build
 sudo ninja -C build install
 
 sudo echo -e "\nInstalling pktgen..."
 cd /opt
-sudo wget https://git.dpdk.org/apps/pktgen-dpdk/snapshot/pktgen-dpdk-pktgen-21.02.0.tar.xz
-sudo tar -xJvf pktgen-dpdk-pktgen-21.02.0.tar.xz
-cd pktgen-dpdk-pktgen-21.02.0/
+
+sudo wget https://git.dpdk.org/apps/pktgen-dpdk/snapshot/pktgen-dpdk-pktgen-23.06.1.tar.xz
+sudo tar -xJvf pktgen-dpdk-pktgen-23.06.1.tar.xz
+cd pktgen-dpdk-pktgen-23.06.1/
 sudo make
 sudo ldconfig
 
+cd Builddir/
+sudo ninja install
+
 sudo echo -e "\nEnabling hugepages..."
-sudo echo 1024 |sudo tee /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
+sudo echo 1024 | sudo tee /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
 mountpoint -q /dev/hugepages || mount -t hugetlbfs nodev /dev/hugepages
 
 # FORBIDDEN - HAVE TO BE LOGGED IN :(
@@ -126,13 +129,10 @@ mountpoint -q /dev/hugepages || mount -t hugetlbfs nodev /dev/hugepages
 # wget https://developer.nvidia.com/networking/secure/doca-sdk/DOCA_1.0/DOCA_10_b163/ubuntu2004/mlnx-dpdk-dev_20.11-1mlnx1_amd64.deb
 # DEBIAN_FRONTEND=noninteractive dpkg --force -i mlnx-dpdk_20.11-1mlnx1_amd64.deb
 
-
 # sudo echo -e "\nInstall rxptools and dpi tools..."
 # wget https://developer.nvidia.com/networking/secure/doca-sdk/DOCA_1.0/DOCA_10_b163/ubuntu1804_ubuntu2004/rxp-compiler_21.02.3_amd64.deb
 # wget https://developer.nvidia.com/networking/secure/doca-sdk/DOCA_1.0/DOCA_10_b163/ubuntu2004/rxpbench_21.03_20210401_0_ubuntu_20_amd64.deb
 # wget https://developer.nvidia.com/networking/secure/doca-sdk/DOCA_1.0/DOCA_10_b163/ubuntu2004/doca-dpi-tools_21.03.038-1_amd64.deb
-
-
 
 sudo echo -e "\n\n ============ DONE =========== "
 sudo echo -e "\n\n ============ INSTALLATION FINISHED =========== "
