@@ -18,7 +18,7 @@ sudo echo -e "\nSet permissions for /mydata"
 sudo chmod -R 777 /mydata
 
 #dpdk dependencies
-DPDK_DEP="libc6-dev libpcap0.8 libpcap0.8-dev libpcap-dev meson ninja-build libnuma-dev python3-pyelftools"
+DPDK_DEP="libc6-dev libpcap0.8 libpcap0.8-dev libpcap-dev meson ninja-build libnuma-dev python3-pyelftools liblua5.3-dev"
 DEBIAN_FRONTEND=noninteractive sudo apt-get -o DPkg::Lock::Timeout=600 install -y --no-install-recommends $DPDK_DEP
 
 sudo echo -e "\nInstalling MLNX driver..."
@@ -86,7 +86,7 @@ cd /opt
 sudo wget https://git.dpdk.org/apps/pktgen-dpdk/snapshot/pktgen-dpdk-pktgen-23.06.1.tar.xz
 sudo tar -xJvf pktgen-dpdk-pktgen-23.06.1.tar.xz
 cd pktgen-dpdk-pktgen-23.06.1/
-sudo make
+sudo make buildlua
 sudo ldconfig
 
 cd Builddir/
