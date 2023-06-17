@@ -7,15 +7,15 @@ sudo date | sudo tee -a /etc/motd
 
 cat /local/repository/source/bashrc_template | sudo tee /root/.bashrc
 
-DEBIAN_FRONTEND=noninteractive sudo apt-get update -y
+DEBIAN_FRONTEND=noninteractive sudo apt-get -o DPkg::Lock::Timeout=600 update -y
 
 sudo echo -e "\nInstalling xfce and vnc server..."
 DEPS="tightvncserver lightdm lxde xfonts-base libnss3-dev firefox"
-DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends $DEPS
+DEBIAN_FRONTEND=noninteractive sudo apt-get -o DPkg::Lock::Timeout=600 install -y --no-install-recommends $DEPS
 
 sudo echo -e "\nInstalling DOCA SDKMANAGER dependencies..."
 DOCA_SDK_MAN_DEP="gconf-service gconf-service-backend gconf2-common libcanberra-gtk-module libcanberra-gtk0 libgconf-2-4"
-DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends $DOCA_SDK_MAN_DEP
+DEBIAN_FRONTEND=noninteractive sudo apt-get -o DPkg::Lock::Timeout=600 install -y --no-install-recommends $DOCA_SDK_MAN_DEP
 
 #setting up extra storage
 sudo echo -e "\nSet permissions for /mydata"
@@ -24,18 +24,18 @@ sudo chmod -R 777 /mydata
 sudo echo -e "\nInstalling DOCKER and its dependencies..."
 #install dependencies for docker
 DOCKER_DEP="apt-transport-https ca-certificates curl gnupg lsb-release"
-DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends $DOCKER_DEP
+DEBIAN_FRONTEND=noninteractive sudo apt-get -o DPkg::Lock::Timeout=600 install -y --no-install-recommends $DOCKER_DEP
 #install certificate for docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
+sudo apt-get -o DPkg::Lock::Timeout=600 update
 #install docker
 DOCKER="docker-ce docker-ce-cli containerd.io"
-DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends $DOCKER
+DEBIAN_FRONTEND=noninteractive sudo apt-get -o DPkg::Lock::Timeout=600 install -y --no-install-recommends $DOCKER
 
 #dpdk dependencies
 DPDK_DEP="libc6-dev libpcap0.8 libpcap0.8-dev libpcap-dev meson ninja-build libnuma-dev python3-pyelftools"
-DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends $DPDK_DEP
+DEBIAN_FRONTEND=noninteractive sudo apt-get -o DPkg::Lock::Timeout=600 install -y --no-install-recommends $DPDK_DEP
 
 sudo echo -e "\nStopping docker daemon and update location for downloading sources..."
 sudo /etc/init.d/docker stop
