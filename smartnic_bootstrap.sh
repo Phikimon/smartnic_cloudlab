@@ -20,8 +20,13 @@ DEBIAN_FRONTEND=noninteractive sudo apt-get -o DPkg::Lock::Timeout=600 install -
 sudo echo -e "\nSet permissions for /mydata"
 sudo chmod -R 777 /mydata
 
+#lua
+LUA_DEP="liblua5.3-dev luarocks lua5.3"
+DEBIAN_FRONTEND=noninteractive sudo apt-get -o DPkg::Lock::Timeout=600 install -y --no-install-recommends $LUA_DEP
+sudo luarocks install luasocket
+
 #dpdk dependencies
-DPDK_DEP="libc6-dev libpcap0.8 libpcap0.8-dev libpcap-dev meson ninja-build libnuma-dev python3-pyelftools liblua5.3-dev"
+DPDK_DEP="libc6-dev libpcap0.8 libpcap0.8-dev libpcap-dev meson ninja-build libnuma-dev python3-pyelftools"
 DEBIAN_FRONTEND=noninteractive sudo apt-get -o DPkg::Lock::Timeout=600 install -y --no-install-recommends $DPDK_DEP
 
 sudo echo -e "\nInstalling MLNX driver..."
