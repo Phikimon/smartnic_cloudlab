@@ -8,7 +8,7 @@ sudo date | sudo tee -a /etc/motd
 cat /local/repository/source/bashrc_template | sudo tee /root/.bashrc
 
 # Hope nobody minds
-echo "export PKTGEN_PATH=/opt/pktgen-dpdk-pktgen-23.06.1/" | tee -a /users/*/.bashrc | tee -a /root/.bashrc
+echo "export PKTGEN_PATH=/opt/pktgen-dpdk-pktgen-23.06.1/" | sudo tee -a /users/*/.bashrc | sudo tee -a /root/.bashrc
 
 DEBIAN_FRONTEND=noninteractive sudo apt-get -o DPkg::Lock::Timeout=600 update -y
 
