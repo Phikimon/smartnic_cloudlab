@@ -28,7 +28,7 @@ node_bf1.hardware_type = 'r7525'
 # https://gitlab.flux.utah.edu/emulab/emulab-devel/-/issues/661
 node_bf1.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU20-64-STD'
 bs1 = node_bf1.Blockstore("bs1", "/mydata")
-bs1.size = "50GB"
+bs1.size = "500GB"
 iface0 = node_bf1.addInterface('interface-0', pg.IPv4Address('10.0.0.1','255.255.255.0'))
 iface1 = node_bf1.addInterface('interface-2', pg.IPv4Address('10.0.1.1','255.255.255.0'))
 iface2 = node_bf1.addInterface('interface-4', pg.IPv4Address('10.10.10.1','255.255.255.0'))
@@ -39,7 +39,7 @@ node_bf2 = request.RawPC('bf2')
 node_bf2.hardware_type = 'r7525'
 node_bf2.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU20-64-STD'
 bs2 = node_bf2.Blockstore("bs2", "/mydata")
-bs2.size = "50GB"
+bs1.size = "500GB"
 iface4 = node_bf2.addInterface('interface-1', pg.IPv4Address('10.0.0.2','255.255.255.0'))
 iface5 = node_bf2.addInterface('interface-3', pg.IPv4Address('10.0.1.2','255.255.255.0'))
 iface6 = node_bf2.addInterface('interface-5', pg.IPv4Address('10.10.10.2','255.255.255.0'))

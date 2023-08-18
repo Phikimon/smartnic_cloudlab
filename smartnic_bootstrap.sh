@@ -26,7 +26,7 @@ DEBIAN_FRONTEND=noninteractive sudo apt-get -o DPkg::Lock::Timeout=600 install -
 sudo luarocks install luasocket
 
 #dpdk dependencies
-DPDK_DEP="libc6-dev libpcap0.8 libpcap0.8-dev libpcap-dev meson ninja-build libnuma-dev python3-pyelftools"
+DPDK_DEP="libc6-dev libpcap0.8 libpcap0.8-dev libpcap-dev meson ninja-build libnuma-dev python3-pyelftools libcjson-dev"
 DEBIAN_FRONTEND=noninteractive sudo apt-get -o DPkg::Lock::Timeout=600 install -y --no-install-recommends $DPDK_DEP
 
 sudo echo -e "\nInstalling MLNX driver..."
