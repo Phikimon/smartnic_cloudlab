@@ -84,7 +84,7 @@ sudo tar -xJvf dpdk-22.11.2.tar.xz
 cd dpdk-stable-22.11.2
 export RTE_SDK=/opt/dpdk-stable-22.11.2
 export RTE_TARGET=x86_64-native-linuxapp-gcc
-sudo meson --buildtype=debug -Dexamples=all build
+sudo meson build
 sudo ninja -C build
 sudo ninja -C build install
 
