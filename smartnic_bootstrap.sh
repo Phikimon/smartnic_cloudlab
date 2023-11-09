@@ -1,6 +1,13 @@
 #!/bin/bash
 set -x
 
+MLNX_PATH="/opt/MLNX_OFED_LINUX-5.3-1.0.0.1-ubuntu20.04-x86_64/"
+if [ -d "$MLNX_PATH" ]
+then
+	echo "Directory $MLNX_PATH exists, skipping installation." | sudo tee /opt/install_log
+	exit
+fi
+
 {
 sudo echo -e "\n\n ============ INSTALLATION IS IN PROGRESS =========== " | sudo tee /etc/motd
 sudo date | sudo tee -a /etc/motd
